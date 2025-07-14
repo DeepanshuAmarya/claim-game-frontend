@@ -6,6 +6,9 @@ function App() {
   const [newName, setNewName] = useState('');
   const [lastClaim, setLastClaim] = useState({}); // store points per user
 
+  const API_BASE = 'https://claim-backend-gi3e.onrender.com';
+
+
   const fetchUsers = async () => {
     const res = await axios.get('http://localhost:5000/users');
     setUsers(res.data);
@@ -43,7 +46,7 @@ function App() {
       </div>
 
       <h3 className="font-bold my-6">Leaderboard</h3>
-      <table border="1" cellPadding="8" width="100%">
+      <table className="border-1" border="1" cellPadding="8" width="100%">
         <thead>
           <tr>
             <th>Rank</th>
@@ -52,12 +55,12 @@ function App() {
             <th>Claim Points</th>
           </tr>
         </thead>
-        <tbody>
+        <tbody className="border-1">
           {users.map((u) => (
-            <tr key={u._id}>
-              <td>{u.rank}</td>
-              <td>{u.name}</td>
-              <td>{u.totalPoints}</td>
+            <tr className="border" key={u._id}>
+              <td className="border">{u.rank}</td>
+              <td className="border">{u.name}</td>
+              <td className="border">{u.totalPoints}</td>
               <td>
                 <button className="bg-orange-600 p-2 rounded-2xl m-1 text-white" onClick={() => claimPoints(u._id)}>Claim</button>
                 {lastClaim[u._id] && (
