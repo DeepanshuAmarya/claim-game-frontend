@@ -30,7 +30,7 @@ function App() {
 
   return (
     <div className="bg-blue-200" style={{ margin: 'auto', padding: '20px' }}>
-      <h2 className="font-bold flex items-center justify-center text-3xl mb-5 p-15 bg-slate-600">User Claim Game</h2>
+      <h2 className="font-bold flex items-center justify-center text-3xl mb-5 p-15 bg-slate-600 text-amber-50">User Claim Game</h2>
 
       <div style={{ marginBottom: '20px' }}>
         <input className="border-1"
