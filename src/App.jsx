@@ -6,11 +6,13 @@ function App() {
   const [newName, setNewName] = useState('');
   const [lastClaim, setLastClaim] = useState({}); // store points per user
 
-  const API_BASE = 'https://claim-backend-gi3e.onrender.com';
+  const API_BASE = process.env.REACT_APP_API_BASE;
 
 
   const fetchUsers = async () => {
-    const res = await axios.get('http://localhost:5000/users');
+    
+    const res = await axios.get(`${API_BASE}/users`);
+
     setUsers(res.data);
   };
 
@@ -20,13 +22,13 @@ function App() {
 
   const addUser = async () => {
     if (!newName.trim()) return;
-    const res = await axios.post('http://localhost:5000/users', { name: newName });
+    const res = await axios.post(`${API_BASE}/users`, { name: newName });
     setUsers(res.data);
     setNewName('');
   };
 
   const claimPoints = async (userId) => {
-    const res = await axios.post('http://localhost:5000/claim', { userId });
+    const res = await axios.post(`${API_BASE}/claim`, { userId });
     setLastClaim({ ...lastClaim, [userId]: res.data.claimedPoints });
     setUsers(res.data.users);
   };
@@ -37,8 +39,8 @@ function App() {
 
       <div style={{ marginBottom: '20px' }}>
         <input className="border-1"
-          type="text" 
-          placeholder="Add user name" 
+          type="text"
+          placeholder="Add user name"
           value={newName}
           onChange={(e) => setNewName(e.target.value)}
         />
