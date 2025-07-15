@@ -6,15 +6,20 @@ function App() {
   const [newName, setNewName] = useState('');
   const [lastClaim, setLastClaim] = useState({}); // store points per user
 
-  const API_BASE = process.env.REACT_APP_API_BASE;
+  const apiUrl = import.meta.env.VITE_API_URL;
 
+  const API_BASE = import.meta.env.VITE_API_BASE;
 
-  const fetchUsers = async () => {
-    
-    const res = await axios.get(`${API_BASE}/users`);
+  // const API_BASE = process.env.REACT_APP_API_BASE;
 
-    setUsers(res.data);
-  };
+  
+
+ const fetchUsers = async () => {
+  const res = await axios.get(`${API_BASE}/users`);
+  console.log("Fetched data:", res.data); // check the structure
+  setUsers(res.data || []);
+ // use res.data.users if available
+};
 
   useEffect(() => {
     fetchUsers();
@@ -24,6 +29,7 @@ function App() {
     if (!newName.trim()) return;
     const res = await axios.post(`${API_BASE}/users`, { name: newName });
     setUsers(res.data);
+    
     setNewName('');
   };
 

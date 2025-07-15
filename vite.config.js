@@ -8,4 +8,7 @@ export default defineConfig({
       react(),
       tailwindcss(),
   ],
+  define: {
+    'process.env': {}, // or better, avoid using `process` in the frontend
+  },
 })
